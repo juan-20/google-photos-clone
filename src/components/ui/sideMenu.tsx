@@ -4,13 +4,13 @@ import { Button } from "./button";
 
 function SideMenu() {
   return (
-    <div className="pb-12 w-1/12">
+    <div className="pb-12 w-full md:w-3/12">
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
             Manage
           </h2>
-          <div className="space-y-1">
+          <div className="space-y-1 flex flex-col">
             <Button
               variant="secondary"
               className="w-full flex gap-2 justify-start"

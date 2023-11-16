@@ -34,9 +34,9 @@ export default function RootLayout({
             </div>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           <SideMenu />
-          <div className="w-full px-4 py-2 pt-12">{children}</div>
+          <div className="w-11/12 px-4 py-2 pt-12">{children}</div>
         </div>
       </body>
     </html>
