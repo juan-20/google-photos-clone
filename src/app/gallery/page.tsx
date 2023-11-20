@@ -5,16 +5,18 @@ import UploadButton from "./uploadButton";
 import cloudinary from "cloudinary";
 import CloudinaryImage from "./cloudinaryImage";
 
-type SearchResult = {
+export type SearchResultProps = {
   public_id: string;
+  tags: string[];
 };
 
 async function GalleryPage() {
   const results = (await cloudinary.v2.search
     .expression("resource_type:image")
     .sort_by("created_at", "desc")
+    .with_field("tags")
     .max_results(5)
-    .execute()) as { resources: SearchResult[] };
+    .execute()) as { resources: SearchResultProps[] };
 
   return (
     <section>
@@ -31,6 +33,7 @@ async function GalleryPage() {
                 src={result.public_id}
                 alt="Description of my image"
                 width="960"
+                ImageData={result}
                 height="600"
               />
             </div>
