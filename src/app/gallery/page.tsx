@@ -18,6 +18,8 @@ async function GalleryPage() {
     .max_results(5)
     .execute()) as { resources: SearchResultProps[] };
 
+  console.log(results);
+
   return (
     <section>
       <div className="flex flex-col gap-8">
@@ -30,10 +32,9 @@ async function GalleryPage() {
             <div key={result.public_id}>
               <CloudinaryImage
                 key={result.public_id}
-                src={result.public_id}
+                imageData={result}
                 alt="Description of my image"
                 width="960"
-                ImageData={result}
                 height="600"
               />
             </div>

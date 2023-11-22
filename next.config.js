@@ -4,9 +4,6 @@ const nextConfig = {
   images: {
     domains: ["cdn.icon-icons.com"],
   },
-  experimental: {
-    serverActions: true,
-  },
 };
 
 module.exports = nextConfig;
