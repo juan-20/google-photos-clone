@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache";
 
 export default async function MarkAsFavoriteAction(
   publicId: string,
-  isFavorite: boolean
+  isFavorite: boolean,
+  path: string
 ) {
   if (!isFavorite) {
     await cloudinary.v2.uploader.remove_tag("liked", [publicId]);
@@ -13,5 +14,5 @@ export default async function MarkAsFavoriteAction(
     await cloudinary.v2.uploader.add_tag("liked", [publicId]);
   }
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  revalidatePath("/gallery");
+  revalidatePath(path);
 }
