@@ -33,7 +33,6 @@ async function GalleryPage() {
               <CloudinaryImage
                 key={result.public_id}
                 imageData={result}
-                path={"/gallery"}
                 alt="Description of my image"
                 width="960"
                 height="600"

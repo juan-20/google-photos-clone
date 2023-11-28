@@ -19,6 +19,7 @@ function UploadButton() {
   return (
     <Button asChild>
       <CldUploadButton
+        // @ts-ignore
         onUpload={(result: UploadResult) => {
           setImageId(result.info?.public_id);
           setTimeout(() => {

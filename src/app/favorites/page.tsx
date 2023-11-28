@@ -25,7 +25,6 @@ export default async function FavoritesPage() {
               <CloudinaryImage
                 key={result.public_id}
                 imageData={result}
-                path={"/favorites"}
                 alt="Description of my image"
                 width="960"
                 height="600"
