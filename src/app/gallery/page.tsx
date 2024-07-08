@@ -8,6 +8,7 @@ import CloudinaryImage from "../../components/ui/cloudinaryImage";
 export type SearchResultProps = {
   public_id: string;
   tags: string[];
+  http_code: number;
 };
 
 async function GalleryPage() {
@@ -18,7 +19,13 @@ async function GalleryPage() {
     .max_results(5)
     .execute()) as { resources: SearchResultProps[] };
 
-  console.log(results);
+    console.log(results);
+
+    const maxCollumns = 4;
+
+    function getCollumns(colNumber: number) {
+      return results.resources.filter((resource, count) => { count % maxCollumns === colNumber});
+    }
 
   return (
     <section>
@@ -28,15 +35,23 @@ async function GalleryPage() {
           <UploadButton />
         </div>
         <div className="grid grid-cols-4 gap-4">
-          {results.resources.map((result) => (
-            <div key={result.public_id}>
-              <CloudinaryImage
-                key={result.public_id}
-                imageData={result}
-                alt="Description of my image"
-                width="960"
-                height="600"
-              />
+
+          {[
+            getCollumns(0),
+            getCollumns(1),
+            getCollumns(2),
+            getCollumns(3),
+          ].map((collumn, index) => (
+            <div className="flex flex-col gap-4" key={index}>
+              {collumn.map((result) => (
+                  <CloudinaryImage
+                    key={result.public_id}
+                    imageData={result}
+                    alt="Description of my image"
+                    width="960"
+                    height="600"
+                  />
+              ))}
             </div>
           ))}
         </div>

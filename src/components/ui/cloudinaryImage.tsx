@@ -1,18 +1,17 @@
 "use client";
 
 import HeartIcon from "@/components/icons/heart";
-import { CldImage } from "next-cloudinary";
-import React, { useState, useTransition } from "react";
+import { CldImage, CldImageProps } from "next-cloudinary";
+import React, { ComponentProps, useState, useTransition } from "react";
 import MarkAsFavoriteAction from "../../app/gallery/actions";
 import { SearchResultProps } from "../../app/gallery/page";
 import { FullHeart } from "@/components/icons/full-heart";
 
 export default function CloudinaryImage(
-  props: any & { imageData: SearchResultProps; path: string }
-) {
+  props: { imageData: SearchResultProps; onUnLike?: (unhertedResource: SearchResultProps) => void; } & Omit<CldImageProps, "src">) {
   const [transition, startTransition] = useTransition();
 
-  const { imageData } = props;
+  const { imageData, onUnLike } = props;
 
   const [isFavorite, setIsFavorite] = useState(
     imageData.tags.includes("liked")
@@ -27,6 +26,7 @@ export default function CloudinaryImage(
             startTransition(() => {
               setIsFavorite(false);
               MarkAsFavoriteAction(imageData.public_id, false);
+              onUnLike?(imageData):null;
             });
           }}
           className="absolute top-2 right-2 hover:stroke-white-500 stroke-red-600 text-red-600 fill-red-700 cursor-pointer"
